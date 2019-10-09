@@ -58,12 +58,11 @@ esac
 # Display all the steps
 echo "Solution:"
 b=$(grep "$win" $db|head -1)
-until (echo $b | grep ^0 > /dev/null); do
+(until (echo $b | grep ^0 > /dev/null); do
   # Print board
+  echo $b | cut -d' ' -f3 | sed 's/\(......\)/\1\n/g' | tac
   echo $b | cut -d' ' -f1
-  echo $b | cut -d' ' -f3 | sed 's/\(......\)/\1\n/g'
   # Find source of this board
   b=$(grep -- "$(grep -- "$b\$" $db | cut -d' ' -f2)\$" $db)
 done
-echo 0
-echo $start | tr -cd 'A-J#_-' | sed 's/\(......\)/\1\n/g'
+echo;echo $start | tr -cd 'A-J#_-' | sed 's/\(......\)/\1\n/g' | tac;echo 0) | tac
