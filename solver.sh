@@ -5,7 +5,7 @@
 # #BAAC#
 # #DFFE#   AA  B  C  D  E
 # #DGHE#   AA  B  C  D  E
-# #_IJ_#
+# #I__J#
 # ##--##   FF  G  H  I  J
 
 start="
