@@ -57,12 +57,4 @@ esac
 
 # Display all the steps
 echo "Solution:"
-b=$(grep "$win" $db|head -1)
-(until (echo $b | grep ^0 > /dev/null); do
-  # Print board
-  echo $b | cut -d' ' -f3 | sed 's/\(......\)/\1\n/g' | tac
-  echo $b | cut -d' ' -f1
-  # Find source of this board
-  b=$(grep -- "$(grep -- "$b\$" $db | cut -d' ' -f2)\$" $db)
-done
-echo;echo $start | tr -cd 'A-J#_-' | sed 's/\(......\)/\1\n/g' | tac;echo 0) | tac
+tac $db | awk '/#AA#/{if(!p){p=$2;print $1,$3}}{if($3==p){print $1,p;p=$2}}' | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev
