@@ -1,21 +1,13 @@
 #!/bin/sh
 
-# ######
-# #BAAC#   Pieces:
-# #BAAC#
-# #DFFE#   AA  B  C  D  E
-# #DGHE#   AA  B  C  D  E
-# #I__J#
-# ##--##   FF  G  H  I  J
-
 start="
-######
-#BAAC#
-#BAAC#
-#DFFE#
-#DGHE#
-#_IJ_#
-##--##
+######  Stupid huarong dao/klotski solver      Usage:   
+#BAAC#                                         solver.sh solve|show
+#BAAC#  Would probably be quicker if it          solve:
+#DFFE#  was written in a proper language.          Solve and show result
+#DGHE#                                           show:
+#I__J#  jonst@nsc.liu.se                           Show result from
+##--##                                             previous run
 "
 win="#AA#"
 
