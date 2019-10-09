@@ -39,7 +39,7 @@ case "$1" in
       i=$(( $i + 1 ))
       echo -n "### $i: "
       # For all patterns in last run, try all moves | keep those who make a change
-      grep "^$l " $db | cut -d' ' -f3 | sed -n $(/bin/echo $moves | tr -d '\012 ') | awk '{a=$0;getline;b=$0;if(a!=b){print '$i',a,b}}' > $td
+      grep "^$l " $db | cut -d' ' -f3 | sed -n $moves | awk '{a=$0;getline;b=$0;if(a!=b){print '$i',a,b}}' > $td
       if [ \! -s $td ];then echo "No new moves?";exit 255;fi
       # Save only results that doesn't already exist in db 
       cat $db $td | sort -S$sbf -u -k3,3 | sort -S$sbf -n -k1 > $tr
