@@ -48,4 +48,4 @@ esac
 # Display all the steps
 echo "Solution:"
 f='/'$win'/{if(!p){p=$2;print $1,$3}}{if($3==p){print $1,p;p=$2}}'
-tac $db | awk $f | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev
+tac $db | awk "$f" | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev
