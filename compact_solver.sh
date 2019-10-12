@@ -25,7 +25,7 @@ case "$1" in
       l=$(( i++ ))
       echo -n "### $i: "
       # Try all moves on the new board patterns | keep those who make a change
-      grep "^$l " $db | sed -n "$m" | awk '{a=$0;getline;b=$0;if(a!=b){print '$i',a,b}}' > ${db}t
+      grep "^$l " $db | sed -n "$m" | awk '{a=$0;getline;if(a!=$0){print '$i',a,$0}}' > ${db}t
       [ -s ${db}t ] || echo "No new moves?" >&2 | false || exit 255
       # Save only results that doesn't already exist in db 
       cat $db ${db}t | sort -S$s -u -k3,3 | sort -S$s -n -k1 > ${db}r
