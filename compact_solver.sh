@@ -1,13 +1,13 @@
 #!/bin/bash
 
-start="
-######  Klotski/huarong dao solver           Usage:   
-#BAAC#                                       solver.sh solve|show
-#BAAC#  Would probably be quicker if it        solve:
-#DFFE#  was written in a proper language.        Solve and show result
-#DGHE#                                         show:
-#I__J#  jonst@nsc.liu.se                         Show result from
-##--##                                           previous run
+start=" Klotski/huarong dao solver
+######                                           Usage:
+#BAAC#  https://en.wikipedia.org/wiki/Klotski    solver.sh solve|show
+#BAAC#                                             solve:
+#DFFE#  Would probably be quicker if it              Solve and show result
+#DGHE#  was written in a proper language.          show:
+#I__J#                                               show result from
+##--##  jonst@nsc.liu.se                             previous run
 "
 w="#AA#"
 
