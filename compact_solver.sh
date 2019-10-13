@@ -21,7 +21,7 @@ case "$1" in
     until grep -q $w $db; do # Are we there yet?
       l=$(( i++ ))
       echo -n "### $i: ";date -Is
-      (cat $db;grep "^$l " $db | sed -n "$m" | awk '{a=$0;getline;if(a!=$0){print '$i',a,$0}}') | sort -S$s -uk3,3 | sort -S$s -nk1 > ${db}t
+      (cat $db;grep "^$l " $db | sed -n "$m" | awk '{a=$0;getline;if(a!=$0){print '$i',a,$0}}') | sort -S$s -uk3,3 > ${db}t
       mv ${db}t $db
     done
     ;;
@@ -33,4 +33,4 @@ case "$1" in
     exit
 esac
 echo "Solution:"
-tac $db | awk '/'$w'/{if(!p){p=$2;print $1,$3}}{if($3==p){print $1,p;p=$2}}' | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev
+sort -S$s -rnk1 < $db | awk '/'$w'/{if(!p){p=$2;print $1,$3}}{if($3==p){print $1,p;p=$2}}' | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev
