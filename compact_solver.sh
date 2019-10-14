@@ -16,8 +16,8 @@ s=4G # Sort Buffer Size
 
 case "$1" in
   solve)
-    echo "0 Start $(echo $start|tr -cd 'A-J#_-')" > $db
-    m=$(echo "$cm"|sed "$cm")
+    echo "0 Start $(tr -cd 'A-J#_-' <<< $start)" > $db
+    m=$(sed "$cm" <<< $cm)
     until grep -q $w $db; do # Are we there yet?
       l=$(( i++ ))
       echo -n "### $i: ";date -Is
