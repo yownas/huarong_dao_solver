@@ -22,10 +22,9 @@ case "$1" in
     # Initialize database
     echo "0 # $(tr -cd 'A-J#_-' <<< $start | tr $s)" > $db
     until grep -q "$win" $db; do # Are we there yet?
-      l=$(( i++ ))
-      echo -n "### $i: "
+      echo -n "### $(( ++i )): "
       # Try all moves on the new board patterns | keep those who make a change
-      (cat $db ; grep "^$l " $db | sed -n "$m" | tr $s | awk '{a=$0;getline;if(a!=$0){print '$i',a,$0}}') | sort -uk3,3 > ${db}r
+      (cat $db ; grep "^$(( --i )) " $db | sed -n "$m" | tr $s | awk '{a=$0;getline;if(a!=$0){print '$i',a,$0}}') | sort -uk3,3 > ${db}r
       mv -f ${db}r $db
 
       # Show db size (Just to see if anything is happening)
