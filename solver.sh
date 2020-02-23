@@ -9,7 +9,6 @@ start="
 #I__J#  jonst@nsc.liu.se                         Show result from
 ##--##                                           previous run
 "
-i=0
 win="#AA#"
 db="/tmp/data.db"
 s="CDEHIJ BBBGGG"
@@ -41,4 +40,4 @@ esac
 
 # Display all the steps
 echo "Solution:"
-sort -rnk1 < $db | awk '/'$win'/{if(!p){p=$2;print $1,$3}}{if($3==p){print $1,p;p=$2}}' | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev | sed "$(sed "$c" <<< $c)" | tr 'e' '\033'
+sort -rnk1 < $db | awk 'BEGIN{p="'$win'"}{if(index($3,p)){print $1,$3;p=$2}}' | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev | sed "$(sed "$c" <<< $c)" | tr 'e' '\033'
