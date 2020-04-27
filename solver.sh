@@ -19,11 +19,11 @@ m=$(sed "$m" <<< "$m")
 case "$1" in
   solve)
     # Initialize database
-    echo "0 # $(tr -cd 'A-J#_-' <<< $start | tr $s)" > $db
+    echo "0 # $(tr -cd A-J#_- <<< $start | tr $s)" > $db
     until grep -q "$win" $db; do # Are we there yet?
       echo -n "### $(( ++i )): "
       # Try all moves on the new board patterns | keep those who make a change
-      (cat $db ; grep "^$(( --i )) " $db | sed -n "$m" | tr $s | awk '{a=$0;getline;if(a!=$0){print '$i',a,$0}}') | sort -uk3,3 > ${db}r
+      (cat $db ; grep "^$(( --i )) " $db | sed -n "$m" | tr $s | awk '{a=$0;getline;if(a!=$0){print '$i',a,$0}}') | sort -uk3 > ${db}r
       mv -f ${db}r $db
 
       # Show db size (Just to see if anything is happening)
@@ -40,4 +40,4 @@ esac
 
 # Display all the steps
 echo "Solution:"
-sort -rnk1 < $db | awk 'BEGIN{p="'$win'"}{if(index($3,p)){print $1,$3;p=$2}}' | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev | sed "$(sed "$c" <<< $c)" | tr 'e' '\033'
+sort -rnk1 < $db | awk -v p=$win '(index($3,p)){print $1,$3;p=$2}' | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev | sed "$(sed "$c" <<< $c)" | tr 'e' '\033'
