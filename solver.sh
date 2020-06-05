@@ -40,4 +40,4 @@ esac
 
 # Display all the steps
 echo "Solution:"
-sort -rnk1 < $db | awk -v p=$win '(index($3,p)){print $1,$3;p=$2}' | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev | sed "$(sed "$c" <<< $c)" | tr 'e' '\033'
+sort -rn < $db | awk -v p=$win '(index($3,p)){print $1,$3;p=$2}' | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev | sed "$(sed "$c" <<< $c)" | tr 'e' '\033'
