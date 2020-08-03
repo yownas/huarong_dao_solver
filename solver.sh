@@ -8,7 +8,7 @@
 #I__J#  jonst@nsc.liu.se                         Show result from
 ##--##                                           previous run
 
-win="#AA#"
+w="#AA#"
 d="/tmp/data.db"
 s="CDEHIJ BBBGGG"
 c='s/.* #/#/;s#\(.\)\([0-9]*\)#s/\1/e[\2m  /g;#g; #100A102B104F105G103_49-49$49'
@@ -19,7 +19,7 @@ case $1 in
   solve)
     # Initialize database
     echo "0 # $(awk '/^#[^ !]/{printf $1}' < $0 | tr $s)" > $d
-    until grep -q "$win" $d; do # Are we there yet?
+    until grep -q "$w" $d; do # Are we there yet?
       echo -n "### $(( ++i )): "
       # Try all moves on the new board patterns
       (cat $d ; grep "^$(( --i )) " $d | sed -n "$m" | tr $s | awk '{a=$0;getline;if(a!=$0){print '$i',a,$0}}') > $d.
@@ -40,4 +40,4 @@ esac
 
 # Display all the steps
 echo Solution:
-sort -rn < $d | awk -v p=$win '(index($3,p)){print $1,$3;p=$2}' | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev | sed "$(sed "$c" <<< $c)" | tr 'e' '\033'
+sort -rn < $d | awk -v p=$w '(index($3,p)){print $1,$3;p=$2}' | rev | sed 'y/ /\n/;s/\(#....#\)/\n\1/g' | tac | rev | sed "$(sed "$c" <<< $c)" | tr 'e' '\033'
