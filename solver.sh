@@ -18,7 +18,7 @@ m=$(sed "$m" <<< "$m")
 case $1 in
   solve)
     # Initialize database
-    echo "0 # $(awk '/^#[^ !]/{printf $1}' < $0 | tr $s)" > $d
+    echo "0 # $(awk '/^#[^ !]/{printf $1}' $0 | tr $s)" > $d
     until grep -q "$w" $d; do # Are we there yet?
       echo -n "### $(( ++i )): "
       # Try all moves on the new board patterns
