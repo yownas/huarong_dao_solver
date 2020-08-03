@@ -1,6 +1,5 @@
 #!/bin/bash
 
-start="
 ######  Klotski/huarong dao solver           Usage:   
 #BAAC#                                       solver.sh solve|show
 #BAAC#  Would probably be quicker if it        solve:
@@ -8,7 +7,7 @@ start="
 #DGHE#                                         show:
 #I__J#  jonst@nsc.liu.se                         Show result from
 ##--##                                           previous run
-"
+
 win="#AA#"
 d="/tmp/data.db"
 s="CDEHIJ BBBGGG"
@@ -19,7 +18,7 @@ m=$(sed "$m" <<< "$m")
 case $1 in
   solve)
     # Initialize database
-    echo "0 # $(tr -cd A-J#_- <<< $start | tr $s)" > $d
+    echo "0 # $(awk '/^#[^ !]/{printf $1}' < $0 | tr $s)" > $d
     until grep -q "$win" $d; do # Are we there yet?
       echo -n "### $(( ++i )): "
       # Try all moves on the new board patterns
