@@ -22,9 +22,10 @@ case $1 in
     echo "0 # $(tr -cd A-J#_- <<< $start | tr $s)" > $db
     until grep -q "$win" $db; do # Are we there yet?
       echo -n "### $(( ++i )): "
-      # Try all moves on the new board patterns | keep those who make a change
-      (cat $db ; grep "^$(( --i )) " $db | sed -n "$m" | tr $s | awk '{a=$0;getline;if(a!=$0){print '$i',a,$0}}') | sort -uk3 > ${db}r
-      mv -f ${db}r $db
+      # Try all moves on the new board patterns
+      (cat $db ; grep "^$(( --i )) " $db | sed -n "$m" | tr $s | awk '{a=$0;getline;if(a!=$0){print '$i',a,$0}}') > ${db}r
+      # Remove duplicates
+      sort -uk3 ${db}r > $db
 
       # Show db size (Just to see if anything is happening)
       wc -l < $db
